@@ -4,11 +4,11 @@ exports.up = function(knex, Promise) {
   return knex.schema.createTable(TABLE_NAME, function(table){
     table.increments().defaultsTo(0)
     table.integer('user_acc_id').notNullable().references('users_accounts.id')
-    table.string('type').notNullable()
+    table.boolean('deposit').notNullable()
     table.integer('ammount').notNullable()
-    table.timestamps(true, true)
     table.string('purpose').defaultsTo('Not Specified')
     table.boolean('scheduled').defaultsTo(false)
+    table.timestamps(true, true)
   })
 };
 
