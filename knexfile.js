@@ -4,7 +4,7 @@ module.exports = {
 
   development: {
     client: 'postgresql',
-    connection: 'postgresql://localhost/Q2_db',
+    connection: 'postgresql://localhost/q2_db',
     migrations: {
       directory: path.join(__dirname, 'db', 'migrations')
     },
@@ -15,7 +15,7 @@ module.exports = {
 
   test: {
     client: 'postgresql',
-    connection: 'postgresql://localhost/Q2_db',
+    connection: 'postgresql://localhost/q2_db',
     migrations: {
       directory: path.join(__dirname, 'db', 'migrations')
     },
