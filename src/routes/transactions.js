@@ -1,0 +1,13 @@
+const express = require('express')
+const router = express.Router()
+const transactionController = require('../controllers/transactions')
+
+//////////////////////////////////////////////////////////////////////////////
+// Basic CRUD Methods
+//////////////////////////////////////////////////////////////////////////////
+
+// router.post('/', transactionController.create)
+
+
+
+module.exports = router
