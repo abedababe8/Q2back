@@ -4,7 +4,6 @@ exports.up = function(knex, Promise) {
   return knex.schema.createTable(TABLE_NAME, function(table){
     table.increments()
     table.string('NameOfAccount')
-    // table.integer('total')
     table.timestamps(true, true)
   })
 };

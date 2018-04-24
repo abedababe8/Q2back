@@ -1,5 +1,6 @@
 const db = require('../../db')
 const bcrypt = require('bcrypt-as-promised')
+const accountModel = require('./accounts')
 
 //////////////////////////////////////////////////////////////////////////////
 // Basic CRUD Methods
@@ -52,7 +53,38 @@ function create(username, password){
   })
 }
 
+
+function getAllAccounts(user_id){
+  return (
+    db('users_accounts')
+    .where({user_id})
+    .then(function(accounts){
+      console.log(accounts);
+      return Promise.all(
+        accounts.map(ele => accountModel.getOne(ele.account_id))
+      )
+    })
+  )
+}
+function createAccount(accName){
+  return (
+    db('accounts')
+    .insert({NameOfAccount: accName})
+    .returning('*')
+  )
+}
+function createUser_Acc(user_id, newAccId){
+  console.log(user_id, newAccId);
+  return (
+    db('users_accounts')
+    .insert({user_id, account_id: newAccId})
+    .returning('*')
+  )
+}
 module.exports = {
   getOneByUserName,
-  create
+  create,
+  getAllAccounts,
+  createAccount,
+  createUser_Acc
 }

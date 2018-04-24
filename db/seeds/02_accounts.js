@@ -7,9 +7,13 @@ exports.seed = function(knex, Promise) {
       // Inserts seed entries
       return knex(TABLE_NAME).insert([
         {id: 1, NameOfAccount: 'abedababe'},
-        {id: 2, NameOfAccount: 'sharedLily+Abe'},
-        {id: 3, NameOfAccount: 'kushkash'},
-        {id: 4, NameOfAccount: 'announcment!'}
-      ]);
-    });
+        {id: 2, NameOfAccount: 'abe+lily'},
+        {id: 3, NameOfAccount: 'sambam'},
+        {id: 4, NameOfAccount: 'quest'}
+    ]);
+  })
+    .then(() => {
+      // reset sequence
+      return knex.raw(`SELECT setval('${TABLE_NAME}_id_seq', (SELECT MAX(id) FROM ${TABLE_NAME}));`)
+})
 };

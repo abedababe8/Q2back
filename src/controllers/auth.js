@@ -96,5 +96,6 @@ module.exports = {
   login,
   getAuthStatus,
   isAuthenticated,
+  isAllowed,
   isSelf
 }
