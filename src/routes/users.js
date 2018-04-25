@@ -11,8 +11,9 @@ router.post('/', userController.create)
 
 
 router.get('/:userId/accounts', userController.getAllAccounts)
+router.get('/:userId/tags', userController.getAllTags)
 router.post('/:userId/accounts', userController.createAccount)
-
-
+router.post('/:userId/accounts/:accountId/transactions', userController.createTransaction)
+router.get('/:userId/accounts/:accountId/transactions', userController.getAllTransactions)
 
 module.exports = router

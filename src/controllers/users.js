@@ -3,12 +3,29 @@ const userModel = require('../models/users')
 //////////////////////////////////////////////////////////////////////////////
 // Basic CRUD Methods
 //////////////////////////////////////////////////////////////////////////////
-function get(req, res, next){
-  accountModel.get(user_id)
-  .then()
-  res.status(200).json({ data })
+function createTransaction(req, res, next){
+  userModel.getUser_Acc(req.params.userId, req.params.accountId)
+  .then(function(user_Acc){
+    let user_acc_id = user_Acc.id
+    return userModel.createTransaction(user_acc_id, req.body.tag, req.body.memo, req.body.deposit, req.body.amnt)
+  })
+  .then(function(data){
+      res.status(200).json({data})
+  })
+  .catch(next)
 }
 
+function getAllTransactions(req, res, next){
+  userModel.getUser_Acc(req.params.userId, req.params.accountId)
+  .then(function(user_Acc){
+    let user_acc_id = user_Acc.id
+    return userModel.getAllTransactions(user_acc_id)
+  })
+  .then(function(data){
+      res.status(200).json({data})
+  })
+  .catch(next)
+}
 
 function create(req, res, next){
   if(!req.body.username){
@@ -45,15 +62,22 @@ function createAccount(req, res, next){
       return res.status(200).send(data)
     })
   })
-
+}
+function getAllTags(req, res, next){
+  userModel.getAllTags()
+  .then(function(tags){
+    return res.status(200).send(tags)
+  })
 }
 //////////////////////////////////////////////////////////////////////////////
 // Quality of Life functions
 //////////////////////////////////////////////////////////////////////////////
 
 module.exports = {
+  createTransaction,
+  getAllTransactions,
   create,
-  get,
   getAllAccounts,
-  createAccount
+  createAccount,
+  getAllTags
 }

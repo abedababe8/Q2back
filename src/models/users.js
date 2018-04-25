@@ -81,10 +81,40 @@ function createUser_Acc(user_id, newAccId){
     .returning('*')
   )
 }
+function getUser_Acc(user_id, account_id){
+  return (
+    db('users_accounts')
+    .where({ user_id, account_id })
+    .first()
+  )
+}
+function getAllTags(){
+  return (
+    db('tags')
+    .returning('*')
+  )
+}
+function createTransaction(user_acc_id, tag_id, memo, deposit, ammount){
+  return (
+    db('transactions')
+    .insert({user_acc_id, tag_id, memo, deposit, ammount})
+    .returning('*')
+  )
+}
+function getAllTransactions(user_acc_id){
+  return (
+    db('transactions')
+    .where({user_acc_id})
+  )
+}
 module.exports = {
   getOneByUserName,
   create,
   getAllAccounts,
   createAccount,
-  createUser_Acc
+  createUser_Acc,
+  getUser_Acc,
+  getAllTags,
+  createTransaction,
+  getAllTransactions
 }
