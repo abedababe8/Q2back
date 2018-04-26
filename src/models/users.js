@@ -94,17 +94,25 @@ function getAllTags(){
     .returning('*')
   )
 }
-function createTransaction(user_acc_id, tag_id, memo, deposit, ammount){
+function createTransaction(acc_id, user_id, tag_id, memo, deposit, ammount){
   return (
     db('transactions')
-    .insert({user_acc_id, tag_id, memo, deposit, ammount})
+    .insert({acc_id, user_id, tag_id, memo, deposit, ammount})
     .returning('*')
   )
 }
-function getAllTransactions(user_acc_id){
+function getAllTransactions(acc_id){
   return (
     db('transactions')
-    .where({user_acc_id})
+    .where({acc_id})
+  )
+}
+function deleteTransaction(transId){
+  return (
+    db('transactions')
+    .where({id: transId})
+    .del()
+    .returning('*')
   )
 }
 module.exports = {
@@ -116,5 +124,6 @@ module.exports = {
   getUser_Acc,
   getAllTags,
   createTransaction,
-  getAllTransactions
+  getAllTransactions,
+  deleteTransaction
 }

@@ -3,7 +3,8 @@ const TABLE_NAME = 'transactions'
 exports.up = function(knex, Promise) {
   return knex.schema.createTable(TABLE_NAME, function(table){
     table.increments()
-    table.integer('user_acc_id').notNullable().references('users_accounts.id')
+    table.integer('user_id').notNullable().references('users.id')
+    table.integer('acc_id').notNullable().references('accounts.id')
     table.integer('tag_id').notNullable().references('tags.id').defaultsTo(1)
     table.string('memo').defaultsTo('No Entry')
     table.boolean('deposit').notNullable()

@@ -4,11 +4,7 @@ const userModel = require('../models/users')
 // Basic CRUD Methods
 //////////////////////////////////////////////////////////////////////////////
 function createTransaction(req, res, next){
-  userModel.getUser_Acc(req.params.userId, req.params.accountId)
-  .then(function(user_Acc){
-    let user_acc_id = user_Acc.id
-    return userModel.createTransaction(user_acc_id, req.body.tag, req.body.memo, req.body.deposit, req.body.amnt)
-  })
+  return userModel.createTransaction(req.params.accountId, req.params.userId, req.body.tag, req.body.memo, req.body.deposit, req.body.amnt)
   .then(function(data){
       res.status(200).json({data})
   })
@@ -16,15 +12,30 @@ function createTransaction(req, res, next){
 }
 
 function getAllTransactions(req, res, next){
-  userModel.getUser_Acc(req.params.userId, req.params.accountId)
-  .then(function(user_Acc){
-    let user_acc_id = user_Acc.id
-    return userModel.getAllTransactions(user_acc_id)
-  })
+  return userModel.getAllTransactions(req.params.accountId)
   .then(function(data){
       res.status(200).json({data})
   })
   .catch(next)
+}
+
+function createUser_Acc(req, res, next){
+  userModel.getOneByUserName(req.body.findUser)
+  .then(function(foundUser){
+    let foundUserId = foundUser.id
+    return userModel.createUser_Acc(foundUserId, req.params.accountId)
+  })
+  .then(function(newUser_Acc){
+    res.status(201).send({newUser_Acc})
+  })
+  .catch(next)
+}
+
+function deleteTransaction(req, res, next){
+  userModel.deleteTransaction(req.params.transId)
+  .then(function(deletedTrans){
+    res.status(200).send({deletedTrans})
+  })
 }
 
 function create(req, res, next){
@@ -76,6 +87,8 @@ function getAllTags(req, res, next){
 module.exports = {
   createTransaction,
   getAllTransactions,
+  createUser_Acc,
+  deleteTransaction,
   create,
   getAllAccounts,
   createAccount,
