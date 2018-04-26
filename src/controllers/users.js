@@ -39,15 +39,15 @@ function deleteTransaction(req, res, next){
 }
 
 function create(req, res, next){
-  if(!req.body.username){
+  if(!req.body.new_username){
     return next({ status: 400, message: 'Bad username'})
   }
 
-  if(!req.body.password){
+  if(!req.body.new_password){
     return next({ status: 400, message: 'Bad username'})
   }
-
-  userModel.create(req.body.username, req.body.password)
+  console.log(req.body);
+  userModel.create(req.body.new_username, req.body.new_password)
   .then(function(data){
     return res.status(201).send({ data })
   })

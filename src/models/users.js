@@ -32,7 +32,7 @@ function create(username, password){
   .then(function(data){
     // if user already exists, return 400
     if(data) throw { status: 400, message:'User already exists'}
-
+    console.log(password);
     // hash password
     return bcrypt.hash(password, 10)
   })
