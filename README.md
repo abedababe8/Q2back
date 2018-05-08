@@ -7,10 +7,13 @@ A multi-page budgeting app for people to connect and visualize their money.
 I wanted to create something that I had experienced a need for amongst my peers, and something that could display data from a database and connect users through authentication and authorization.
 
 #### To Use:
-`npm install
+```
+npm install
+createdb q2_db
 npm run knex migrate:latest
 npm run knex seed:run
-npm run dev`
+npm run dev
+```
 
 
 
